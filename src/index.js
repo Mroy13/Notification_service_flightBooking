@@ -16,7 +16,7 @@
     //console.log(Buffer.from(data.content));
     const object=JSON.parse(data.content.toString());
     //console.log(object);
-    const res= await emailService.sendEmail('projectemailservice13@gmail.com',object.recipientEmail,object.subject,object.message);
+    const res= await emailService.sendEmail(ServerConfig.MAIL_USERNAME,object.recipientEmail,object.subject,object.message);
    // console.log(res);
     channel.ack(data);
     }

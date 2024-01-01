@@ -1,6 +1,28 @@
-This is a base node js project template, which anyone can use as it has been prepared, by keeping some of the most important code principles and project management recommendations. Feel free to change anything. 
+# Notification Service for Flight Booking System
+
+This microservice, `notification_service`, is an integral part of the Flight Booking System. It's responsible for handling notifications to specific users based on messages received from RabbitMQ queues. The service is built using Node.js, Express.js, MySQL for data storage, Sequelize as the ORM, Nodemailer for email functionality, and RabbitMQ for message queue management.
+
+## Tech Stack
+
+- **Node.js**: JavaScript runtime environment for executing code.
+- **Express.js**: Web application framework for Node.js, facilitating API creation.
+- **MySQL**: Relational database used for persistent data storage.
+- **Sequelize**: Promise-based ORM for Node.js that supports multiple databases.
+- **Nodemailer**: Node.js module for sending emails.
+- **RabbitMQ**: Message queueing system for handling messages from other services.
+
+## Features
+
+### Message Consumption
+
+The `notification_service` listens to RabbitMQ message queues to consume messages originating from other services within the Flight Booking System. These messages contain specific notification needs for users.
+
+### Notification Delivery
+
+Upon receiving messages from the RabbitMQ queue, this service processes the data and uses Nodemailer to send notifications to the intended users based on the message content.
 
 
+# project Structure_MVC architecture
 `src` -> Inside the src folder all the actual source code regarding the project will reside, this will not include any kind of tests. (You might want to make separate tests folder)
 
 Lets take a look inside the `src` folder
@@ -29,20 +51,28 @@ Lets take a look inside the `src` folder
  - In the root directory create a `.env` file and add the following env variables
     ```
         PORT=<port number of your choice>
+        MAIL_USERNAME='<enter user name>'
+       MAIL_APP_PASSWORD='<enter app pwd>'
     ```
     ex: 
     ```
-        PORT=3000
+       PORT=3002
+       MAIL_USERNAME=''
+       MAIL_APP_PASSWORD=''
     ```
- - delete models migrations and seeders folder then go inside the `src` folder and execute the following command:
-    ```
-      npx sequelize init
-    ```
- - By executing the above command you will get migrations and seeders folder along with a config.json inside the config folder. 
- - If you're setting up your development environment, then write the username of your db, password of your db and in dialect mention whatever db you are using for ex: mysql, mariadb etc
- - If you're setting up test or prod environment, make sure you also replace the host with the hosted db url.
+    
+- To get message_queue(here RABBITMQ) set-up:
+ ```
+ RabbitMQ Installation
+Follow the official RabbitMQ installation guide to install RabbitMQ on your system.
 
+Then you will get local server of rabbitmq.
+```
+```
+NOTE:
+Here rabbitmq(with amqplib) is used to consume message from the message queue.
+ ```
  - To run the server execute
  ```
- node --watch src/index.js
+ npm start
  ```
